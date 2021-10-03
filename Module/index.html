@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type='module'>
+        import {a, b, sum } from './export.js'
+        console.log(sum(a,b))
+    </script>
+
+    <script type='module'>
+        //module1 is return an obj
+        //module2 is return a function to return the length of the lessons
+        import {obj} from './module1.js'
+        import {count} from './module2.js'
+        //obj, count is the same scope yet
+        //they are both just execute once here
+        console.log(count())//init data length is 2
+        obj.add('nodejs',1000)//add 1 tthe obj
+        console.log(obj.get())//obj added nodejs
+        console.log(count())//length of lession is 3
+    </script>
+
+    <script type='module'>
+        import * as api1 from './module3.js'
+        import * as api2 from './module4.js'
+        //api1 and 2 are obj, api2 has export default, and the default is a function
+       
+        console.log(api2.default(api2.a,api1.a, api1.b))
+    </script>
+
+    <script type='module'>
+        //import file return a promise
+        document.querySelector("button").addEventListener("click", async ()=>{
+            let q= await import("./module5.js")
+            console.log(q.a,q.b)
+        })
+
+    </script>
+
+    <button>Hi</button>
+</body>
+</html>
